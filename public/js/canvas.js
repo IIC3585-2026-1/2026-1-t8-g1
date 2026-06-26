@@ -11,13 +11,13 @@ let lastY = 0;
 let currentColor = '#000000';
 let currentLineWidth = 4;
 
-function getCanvasPos(e) {
+function getCanvasPos(clientX, clientY) {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   return {
-    x: (e.clientX - rect.left) * scaleX,
-    y: (e.clientY - rect.top) * scaleY,
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top) * scaleY,
   };
 }
 
@@ -32,17 +32,17 @@ function drawSegment(x0, y0, x1, y1, color, lineWidth) {
   ctx.stroke();
 }
 
-canvas.addEventListener('mousedown', (e) => {
+function onDrawStart(clientX, clientY) {
   isDrawing = true;
-  const pos = getCanvasPos(e);
+  const pos = getCanvasPos(clientX, clientY);
   lastX = pos.x;
   lastY = pos.y;
-});
+}
 
-canvas.addEventListener('mousemove', (e) => {
+function onDrawMove(clientX, clientY) {
   if (!isDrawing) return;
 
-  const pos = getCanvasPos(e);
+  const pos = getCanvasPos(clientX, clientY);
   drawSegment(lastX, lastY, pos.x, pos.y, currentColor, currentLineWidth);
 
   socket.emit('draw:segment', {
@@ -56,12 +56,32 @@ canvas.addEventListener('mousemove', (e) => {
 
   lastX = pos.x;
   lastY = pos.y;
+}
+
+function onDrawEnd() {
+  isDrawing = false;
+}
+
+// Mouse
+canvas.addEventListener('mousedown', (e) => onDrawStart(e.clientX, e.clientY));
+canvas.addEventListener('mousemove', (e) => onDrawMove(e.clientX, e.clientY));
+canvas.addEventListener('mouseup', onDrawEnd);
+canvas.addEventListener('mouseleave', onDrawEnd);
+
+// Touch
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  onDrawStart(touch.clientX, touch.clientY);
 });
 
-canvas.addEventListener('mouseup', () => {
-  isDrawing = false;
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  onDrawMove(touch.clientX, touch.clientY);
 });
 
-canvas.addEventListener('mouseleave', () => {
-  isDrawing = false;
+canvas.addEventListener('touchend', (e) => {
+  e.preventDefault();
+  onDrawEnd();
 });
