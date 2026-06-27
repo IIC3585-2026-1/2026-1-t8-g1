@@ -11,6 +11,30 @@ let lastY = 0;
 let currentColor = '#000000';
 let currentLineWidth = 4;
 
+
+// Controles selector de color
+document.querySelectorAll(".swatch").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Deseleccionar color actual
+    document.querySelector(".swatch.active")?.classList.remove("active");
+    // Marcar nuevo color como seleccionado
+    btn.classList.add("active");
+    currentColor = btn.dataset.color; // Mapea con data-color de los botones en el index
+    document.getElementById("color-picker").value = currentColor;
+  });
+});
+
+document.getElementById("color-picker").addEventListener("input",  (event) => {
+  currentColor = event.target.value;
+  document.querySelector(".swatch.active")?.classList.remove("active");
+});
+
+document.getElementById("line-width").addEventListener("input", (event) => {
+  currentLineWidth = event.target.value;
+  document.getElementById('line-width-val').textContent = event.target.value + 'px';
+});
+
+
 function getCanvasPos(clientX, clientY) {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;

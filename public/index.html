@@ -7,8 +7,34 @@
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
+  
+  
   <h1>Pizarra Colaborativa</h1>
-  <canvas id="canvas"></canvas>
+
+  <div class="workspace">
+    <div class="toolbar">
+
+      <div class="tool-section">
+        <div class="color-swatches">
+          <button class="swatch active" style="background:#000000" data-color="#000000"></button>
+          <button class="swatch" style="background:#e74c3c" data-color="#e74c3c"></button>
+          <button class="swatch" style="background:#3498db" data-color="#3498db"></button>
+          <button class="swatch" style="background:#2ecc71" data-color="#2ecc71"></button>
+          <button class="swatch" style="background:#f39c12" data-color="#f39c12"></button>
+          <button class="swatch" style="background:#9b59b6" data-color="#9b59b6"></button>
+        </div>
+        <input type="color" id="color-picker" value="#000000" title="Color personalizado"/>
+      </div>
+
+      <div class="tool-section">
+        <label>Grosor</label>
+        <input type="range" id="line-width" min="1" max="30" value="4" />
+        <span id="line-width-val">4px</span>
+      </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+  </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/socket.js"></script>

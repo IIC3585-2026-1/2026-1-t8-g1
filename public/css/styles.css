@@ -12,11 +12,14 @@ body {
   gap: 16px;
   padding: 20px;
   font-family: sans-serif;
+  background-color: #E5E5F7;
+  background: repeating-linear-gradient(45deg, #1a1a2e 0, #1a1a2e 20px, #1d1d33 20px, #1d1d33 40px);
 }
 
 h1 {
   color: #e0e0e0;
-  font-size: 1.4rem;
+  font-size: 2.4rem;
+  font-family:cursive;
 }
 
 #canvas {
@@ -27,4 +30,74 @@ h1 {
   width: 900px;
   height: 600px;
   touch-action: none;
+}
+
+.workspace {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.tool-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.tool-btn.active {
+  background: #e8f0fe;
+  border-color: #3498db;
+  color: #3498db;
+}
+
+.color-swatches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.swatch.active {
+  border-color: #333;
+}
+
+#color-picker {
+  width: 36px;
+  height: 36px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#line-width {
+  width: 60px;
 }
