@@ -11,3 +11,7 @@ socket.on('disconnect', () => {
 socket.on('draw:segment', (data) => {
   drawSegment(data.x0, data.y0, data.x1, data.y1, data.color, data.lineWidth);
 });
+
+socket.on('canvas:clear', () => {
+  clearCanvas();
+});

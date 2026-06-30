@@ -34,6 +34,11 @@ document.getElementById("line-width").addEventListener("input", (event) => {
   document.getElementById('line-width-val').textContent = event.target.value + 'px';
 });
 
+document.getElementById('clear-canvas').addEventListener('click', () => {
+  clearCanvas();
+  socket.emit('canvas:clear');
+});
+
 
 function getCanvasPos(clientX, clientY) {
   const rect = canvas.getBoundingClientRect();
@@ -54,6 +59,10 @@ function drawSegment(x0, y0, x1, y1, color, lineWidth) {
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   ctx.stroke();
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function onDrawStart(clientX, clientY) {

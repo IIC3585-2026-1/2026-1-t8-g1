@@ -56,13 +56,14 @@ h1 {
 }
 
 .tool-btn {
-  width: 36px;
-  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background: none;
   cursor: pointer;
   font-size: 18px;
+  padding: 0 10px;
 }
 
 .tool-btn.active {
@@ -100,4 +101,14 @@ h1 {
 
 #line-width {
   width: 60px;
+}
+
+.clear-btn {
+  color: #c0392b;
+  font-size: 14px;
+}
+
+.clear-btn:hover {
+  background: #fdecea;
+  border-color: #e74c3c;
 }

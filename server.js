@@ -18,6 +18,10 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('draw:segment', data);
   });
 
+  socket.on('canvas:clear', () => {
+    socket.broadcast.emit('canvas:clear');
+  });
+
   socket.on('disconnect', () => {
     console.log(`Usuario desconectado: ${socket.id}`);
   });
